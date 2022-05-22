@@ -10,4 +10,4 @@ youtube_dl, py-cord, asyncio
 
 ### Software
 ffmpeg
-
+tested only with Python 3.10
