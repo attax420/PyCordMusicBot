@@ -1,18 +1,20 @@
 # PyCordMusicBot
-a very simple discord music bot written in python using the py-cord and youtube_dl libraries
++ A very simple discord music bot written in python using the py-cord and youtube_dl libraries.
 
-## Why?
-because all python based music bots i found did not work properly.
+## Why yet another way too simple music bot?
++ Because all python based music bots i found did not work properly.
 
 ## Requirements:
 ### Python Packages
-youtube_dl, py-cord, asyncio
++ youtube_dl
++ py-cord
++ asyncio
 
 ### Software
-ffmpeg
++ ffmpeg
 
 ### Python Version
-tested only with Python 3.10
++ tested only with Python 3.10
 
 ### Usage
 + create bot on discord dev portal and add token to main.py.
