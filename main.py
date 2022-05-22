@@ -20,7 +20,7 @@ ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 token = 'INSERT YOUR BOT TOKEN HERE!!!'
 
 class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
+    def __init__(self, source, *, data, volume=1.0):
         super().__init__(source, volume)
         self.data = data
         self.title = data.get("title")
@@ -66,7 +66,6 @@ class Music(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx):
-        """Stops and disconnects the bot from voice"""
         voice_client = discord.utils.get(bot.voice_clients) 
         await voice_client.disconnect()
 
