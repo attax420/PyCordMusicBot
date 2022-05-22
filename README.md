@@ -6,9 +6,7 @@ because all python based music bots i found did not work properly.
 
 ## Requirements:
 ### Python Packages
-youtube_dl
-py-cord
-asyncio
+youtube_dl, py-cord, asyncio
 
 ### Software
 ffmpeg
