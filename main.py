@@ -167,7 +167,6 @@ class Music(commands.Cog):                                              #music b
 
 
 if __name__ == '__main__':
-    bot = commands.Bot(command_prefix="!", description="Ganjagaming Music Bot 1")
+    bot = commands.Bot(command_prefix="!", description="A simple musicbot written in python")
     bot.add_cog(Music(bot))
     bot.run(token)
-
