@@ -1,6 +1,7 @@
 import asyncio
 import discord
 import youtube_dl
+from time import time
 from discord.ext import commands
 
 ytdl_format_options = {
@@ -17,7 +18,7 @@ ytdl_format_options = {
     "source_address": "0.0.0.0",}
 ffmpeg_options = {"options": "-vn"}
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-token = 'INSERT DISCORD BOT TOKEN HERE!!!!'
+token = 'INSERT BOT TOKEN HERE!!!!!'
 
 class YTDLSource(discord.PCMVolumeTransformer):
     '''youtube downloader class'''                         
@@ -29,6 +30,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False):
+        start = time()
         '''method for downloading or streaming music from youtube (List detection is BUGGY)'''           
         loop = loop or asyncio.get_event_loop()
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
@@ -36,8 +38,10 @@ class YTDLSource(discord.PCMVolumeTransformer):
             # take first item from a playlist
             data = data["entries"][0]
         filename = data["url"] if stream else ytdl.prepare_filename(data)
+        end = time()
+        print(f'Runtime YTDL: {end-start}s!')
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
-
+        
 
 global queue
 queue = []
@@ -51,6 +55,7 @@ class Music(commands.Cog):                                              #music b
    
     async def start_playing(self):
         '''audioplayer function that is called from commands and the "after=" attribute of voice_client.play()'''
+        start = time()
         global queue
         global ind 
         global q1
@@ -81,9 +86,10 @@ class Music(commands.Cog):                                              #music b
                 pass
         else: 
             print('DEBUG!!!! len queue < 1')
-            await voice_client.disconnect()
-     
-     
+            await voice_client.disconnect()        
+        end = time()
+        print(f'Runtime start_playing: {end-start}s!')
+
     @commands.command()
     async def join(self, ctx):
         '''joins your voice channel'''
@@ -167,6 +173,6 @@ class Music(commands.Cog):                                              #music b
 
 
 if __name__ == '__main__':
-    bot = commands.Bot(command_prefix="!", description="A simple musicbot written in python")
+    bot = commands.Bot(command_prefix="?", description="A simple musicbot written in python")
     bot.add_cog(Music(bot))
     bot.run(token)
